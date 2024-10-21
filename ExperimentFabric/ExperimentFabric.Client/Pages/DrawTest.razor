@@ -1,0 +1,107 @@
+﻿@* @page "/draw" *@
+
+@inject IJSRuntime JS
+@implements IAsyncDisposable
+@rendermode InteractiveWebAssembly
+
+<h3>Fabric.js with Blazor</h3>
+
+@if (_isModuleLoaded)
+{
+    <canvas id="fabricCanvas" width="500" height="400" style="border:1px solid #000000;"></canvas>
+}
+else
+{
+    <p style="text-align: center;" class="w-500 h-400 p-5">Caricamento...</p>
+}
+
+@* <button @onclick="OpenCanvas">Open Canvas</button> *@
+<button @onclick="AddRectangle">Blue Rectangle</button>
+<button @onclick="EnableBrush">Brush</button>
+
+
+@code {
+
+    // TO DO
+    // JS separati per parti diverse di funzionalità JS e importati in DrawTest.razor.js
+    
+
+
+    private IJSObjectReference? _fabricModule;
+    private IJSObjectReference _drawModule = null!;
+    private bool _isModuleLoaded = false;
+    private bool canvasDisplay = false;
+
+    // protected override async Task OnAfterRenderAsync(bool firstRender)
+    // {
+    //     if (firstRender)
+    //     {
+    //         // Import the JavaScript module after the component has rendered
+    //         //         _fabricModule = await JS.InvokeAsync<IJSObjectReference>(
+    //         // "import", "./js/devfabric.js");
+    //         _drawModule = await JS.InvokeAsync<IJSObjectReference>(
+    // "import", "./Pages/DrawTest.razor.js");
+    //         _isModuleLoaded = true;
+    //         if (_drawModule != null)
+    //         {
+    //             await _drawModule.InvokeVoidAsync("initializeCanvas", "fabricCanvas");
+    //         }
+    //     }
+    // }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // Import the JavaScript module after the component has rendered
+            _drawModule = await JS.InvokeAsync<IJSObjectReference>(
+                "import", "./Pages/DrawTest.razor.js");
+
+            // Mark the module as loaded and re-render the component
+            if (_drawModule != null)
+            {
+                _isModuleLoaded = true;
+                StateHasChanged(); // Trigger re-rendering to add the canvas element
+            }
+            // After the canvas is rendered, initialize it using JS interop
+            if (_drawModule != null && _isModuleLoaded)
+            {
+                // Ensure the canvas exists in the DOM before calling initializeCanvas
+                await _drawModule.InvokeVoidAsync("initializeCanvas", "fabricCanvas");
+            }
+        }
+
+    }
+
+    // private async Task OpenCanvas()
+    // {
+    //     if (_isModuleLoaded)
+    //     {
+    //         await _drawModule.InvokeVoidAsync("initializeCanvas", "fabricCanvas");
+    //     }
+    // }
+
+    private async Task AddRectangle()
+    {
+        if (_isModuleLoaded)
+        {
+            await _drawModule.InvokeVoidAsync("addRectangle");
+        }
+    }
+
+    private async Task EnableBrush()
+    {
+        if (_isModuleLoaded)
+        {
+            await _drawModule.InvokeVoidAsync("enableBrush");
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_fabricModule is not null)
+        {
+            await _drawModule.DisposeAsync();
+        }
+    }
+}

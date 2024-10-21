@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExperimentFabric", "ExperimentFabric\ExperimentFabric\ExperimentFabric.csproj", "{81D7AC18-0281-4901-8094-6817563AEA5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExperimentFabric.Client", "ExperimentFabric\ExperimentFabric.Client\ExperimentFabric.Client.csproj", "{D54DC22A-EC86-4F3C-BA8B-3E94B6EC5FAC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{81D7AC18-0281-4901-8094-6817563AEA5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81D7AC18-0281-4901-8094-6817563AEA5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81D7AC18-0281-4901-8094-6817563AEA5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81D7AC18-0281-4901-8094-6817563AEA5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D54DC22A-EC86-4F3C-BA8B-3E94B6EC5FAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D54DC22A-EC86-4F3C-BA8B-3E94B6EC5FAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D54DC22A-EC86-4F3C-BA8B-3E94B6EC5FAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D54DC22A-EC86-4F3C-BA8B-3E94B6EC5FAC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {950F393F-7C64-4DB6-9E70-DE8C0177878F}
+	EndGlobalSection
+EndGlobal
