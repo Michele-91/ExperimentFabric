@@ -3,10 +3,11 @@
 
 //import { Canvas, Rect } from './Pages/fabric.min.js'; // Import fabric.js
 /*import { fabric } from '../wwwroot/js/fabric.min.js';*/
+//import { canvas } from '../wwwroot/js/initializations.js';
 
 
-var canvas;
 //var canvasLoaded;
+//var canvas;
 
 //function isDomLoaded() {
 //    return document.querySelector("#fabricCanvas") !== null;
@@ -51,16 +52,16 @@ export function initializeCanvas() {
 
 
     // Create a red square of size 50px by 50px
-    var redSquare = new fabric.Rect({
-        left: 100,
-        top: 100,
-        fill: 'red',
-        width: 50,
-        height: 50
-    });
+    //var redSquare = new fabric.Rect({
+    //    left: 100,
+    //    top: 100,
+    //    fill: 'red',
+    //    width: 50,
+    //    height: 50
+    //});
 
-    //// Add the red square to the canvas
-    canvas.add(redSquare);
+    ////// Add the red square to the canvas
+    //canvas.add(redSquare);
 
     console.log('Red square added to the canvas');
 

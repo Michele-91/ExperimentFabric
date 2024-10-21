@@ -1,0 +1,109 @@
+﻿@inject IJSRuntime JS
+@rendermode InteractiveWebAssembly
+@* @implements IAsyncDisposable *@
+
+
+
+<div class="container h-40 w-80 p-3 shapes-card border rounded">
+    <div class="row mb-1 text-white">Disegno</div>
+    <div class="row">
+        @* <svg class="bi" aria-hidden="true"><use xlink:href="#box-seam"></use></svg> *@
+        <div class="col p-1 m-1 d-flex">
+            @*             <button type="button" class="border-white border-rounded bi bi-square">
+            <svg class="bi" aria-hidden="true"><use xlink:href="#box-seam"></use></svg>
+            </button> *@
+            <button @onclick="AddSquare" type="button" class="btn border-white border-rounded border-2 m-1 shape-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-square" viewBox="0 0 16 16">
+                    <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"></path>
+                </svg>
+            </button>
+            <button @onclick="AddTriangle" type="button" class="btn border-white border-rounded border-2 m-1 shape-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-triangle" viewBox="0 0 16 16">
+                    <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.15.15 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.2.2 0 0 1-.054.06.1.1 0 0 1-.066.017H1.146a.1.1 0 0 1-.066-.017.2.2 0 0 1-.054-.06.18.18 0 0 1 .002-.183L7.884 2.073a.15.15 0 0 1 .054-.057m1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767z"></path>
+                </svg>
+            </button>
+            <button @onclick="EnableBrush" type="button" class="btn border-white border-rounded border-2 m-1 shape-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-brush" viewBox="0 0 16 16">
+                    <path d="M15.825.12a.5.5 0 0 1 .132.584c-1.53 3.43-4.743 8.17-7.095 10.64a6.1 6.1 0 0 1-2.373 1.534c-.018.227-.06.538-.16.868-.201.659-.667 1.479-1.708 1.74a8.1 8.1 0 0 1-3.078.132 4 4 0 0 1-.562-.135 1.4 1.4 0 0 1-.466-.247.7.7 0 0 1-.204-.288.62.62 0 0 1 .004-.443c.095-.245.316-.38.461-.452.394-.197.625-.453.867-.826.095-.144.184-.297.287-.472l.117-.198c.151-.255.326-.54.546-.848.528-.739 1.201-.925 1.746-.896q.19.012.348.048c.062-.172.142-.38.238-.608.261-.619.658-1.419 1.187-2.069 2.176-2.67 6.18-6.206 9.117-8.104a.5.5 0 0 1 .596.04M4.705 11.912a1.2 1.2 0 0 0-.419-.1c-.246-.013-.573.05-.879.479-.197.275-.355.532-.5.777l-.105.177c-.106.181-.213.362-.32.528a3.4 3.4 0 0 1-.76.861c.69.112 1.736.111 2.657-.12.559-.139.843-.569.993-1.06a3 3 0 0 0 .126-.75zm1.44.026c.12-.04.277-.1.458-.183a5.1 5.1 0 0 0 1.535-1.1c1.9-1.996 4.412-5.57 6.052-8.631-2.59 1.927-5.566 4.66-7.302 6.792-.442.543-.795 1.243-1.042 1.826-.121.288-.214.54-.275.72v.001l.575.575zm-4.973 3.04.007-.005zm3.582-3.043.002.001h-.002z"></path>
+                </svg>
+            </button>
+            <button @onclick="EnablePencil" type="button" class="btn border-white border-rounded border-2 m-1 shape-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                    <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+
+
+@code {
+
+
+    private IJSObjectReference? _fabricModule;
+    private IJSObjectReference _drawModule = null!;
+    private bool _isModuleLoaded = false;
+    private bool canvasDisplay = false;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // Import the JavaScript module after the component has rendered
+            _drawModule = await JS.InvokeAsync<IJSObjectReference>(
+                "import", "./Pages/DrawCard.razor.js");
+
+            // Mark the module as loaded and re-render the component
+            if (_drawModule != null)
+            {
+                _isModuleLoaded = true;
+                // StateHasChanged(); // Trigger re-rendering to add the canvas element
+            }
+        }
+
+    }
+
+
+    private async Task AddSquare()
+    {
+        if (_isModuleLoaded)
+        {
+            // After the canvas is rendered, initialize it using JS interop
+            if (_drawModule != null && _isModuleLoaded)
+            {
+                await _drawModule.InvokeVoidAsync("addSquare");
+            }
+        }
+    }
+
+    private async Task AddTriangle()
+    {
+        if (_isModuleLoaded)
+        {
+            // After the canvas is rendered, initialize it using JS interop
+            if (_drawModule != null && _isModuleLoaded)
+            {
+                await _drawModule.InvokeVoidAsync("addTriangle");
+            }
+        }
+    }
+
+    private async Task EnableBrush()
+    {
+        // After the canvas is rendered, initialize it using JS interop
+        if (_drawModule != null && _isModuleLoaded)
+        {
+            await _drawModule.InvokeVoidAsync("enableBrush");
+        }
+    }
+
+    private async Task EnablePencil()
+    {
+        // After the canvas is rendered, initialize it using JS interop
+        if (_drawModule != null && _isModuleLoaded)
+        {
+            await _drawModule.InvokeVoidAsync("enablePencil");
+        }
+    }
+}

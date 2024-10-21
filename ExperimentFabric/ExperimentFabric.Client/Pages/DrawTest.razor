@@ -4,27 +4,41 @@
 @implements IAsyncDisposable
 @rendermode InteractiveWebAssembly
 
-<h3>Fabric.js with Blazor</h3>
 
-@if (_isModuleLoaded)
-{
-    <canvas id="fabricCanvas" width="500" height="400" style="border:1px solid #000000;"></canvas>
-}
-else
-{
-    <p style="text-align: center;" class="w-500 h-400 p-5">Caricamento...</p>
-}
+<div class="container">
+    <div class="row h-500 justify-content-around text-center">
+        <div class="col pr-5 border-0">
+            <DrawCard></DrawCard>
+        </div>
+        <div class="col pr-5 border-0">
+            @if (_isModuleLoaded)
+            {
+                @* <canvas id="fabricCanvas" width="500" height="400" style="border:1px solid #000000;"></canvas> *@
+                <canvas id="fabricCanvas" width="500" height="400" style="border:1px solid #000000;" class="w-100 border-rounded"></canvas>
+            }
+            else
+            {
+                <p style="text-align: center;" class="w-500 h-400 p-5">Caricamento...</p>
+            }
+        </div>
+        <div class="col p-5 border-0">
+            
+        </div>
+    </div>
+</div>
+
+
 
 @* <button @onclick="OpenCanvas">Open Canvas</button> *@
-<button @onclick="AddRectangle">Blue Rectangle</button>
+@* <button @onclick="AddRectangle">Blue Rectangle</button>
 <button @onclick="EnableBrush">Brush</button>
-
+ *@
 
 @code {
 
     // TO DO
     // JS separati per parti diverse di funzionalità JS e importati in DrawTest.razor.js
-    
+
 
 
     private IJSObjectReference? _fabricModule;

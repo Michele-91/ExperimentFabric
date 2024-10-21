@@ -1,3 +1,14 @@
+
+
+:root {
+    --memory-orange-color: #DF5937;
+    --memory-grey-color: #435485;
+    --memory-green-color: #1b8F81;
+    --memory-ocra-color: #A87700;
+}
+
+
+
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }

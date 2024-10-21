@@ -1,0 +1,29 @@
+﻿
+
+
+.shapes-card {
+    background-color: var(--memory-orange-color) !important;
+}
+
+
+.colors-card {
+    background-color: var(--memory-grey-color);
+}
+
+
+.maths-card {
+    background-color: var(--memory-green-color);
+}
+
+
+.sounds-card {
+    background-color: var(--memory-ocra-color);
+}
+
+
+
+
+.shape-button {
+    background-color: var(--memory-orange-color) !important;
+    color: white;
+}
