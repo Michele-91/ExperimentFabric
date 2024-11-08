@@ -66,7 +66,7 @@ export function resetBrushesSelection() {
     bigBrushActive = false;
     eraserActive = false;
     //console.log(canvas.getObjects());
-} 
+}
 export function isAnyBrushSelected() {
     return pencilActive || smallBrushActive || mediumBrushActive || bigBrushActive || eraserActive;
 }
@@ -603,6 +603,7 @@ export function addShape(shapeName, customOptions = {}) {
 
     resetBrushesSelection();
     canvas.add(fabricShape);
+
     if (selectableObjectsActive) {
         canvas.setActiveObject(fabricShape);
     } else {
@@ -634,6 +635,7 @@ function resolveCssVariable(value) {
 
 export function selectColor(newSelected) {
     drawState.selectedColor = newSelected;
+
     if (canvas.isDrawingMode) {
         canvas.freeDrawingBrush.color = resolveCssVariable(drawState.selectedColor); // update brush color
     }
@@ -645,13 +647,41 @@ export function selectColor(newSelected) {
             //    obj.set('fill', resolveCssVariable(drawState.selectedColor)); // update shapes color
             //}
             switch (obj.type) {
-                case 'line': // In case it's a free line
+
+                case 'line':
                 case 'path':
-                    obj.set({ // update brush color
-                        stroke: resolveCssVariable(drawState.selectedColor),
-                        fill: null // Ensure fill is not set, to avoid filling the entire area
-                    });
+                    // Differentiate between brush-created paths and other paths
+                    if (obj.stroke && !obj.fill) {
+                        // This is likely a brush stroke, just update the stroke color
+                        obj.set({
+                            stroke: resolveCssVariable(drawState.selectedColor),
+                            fill:  null // Ensure fill is not set, to avoid filling the entire area
+                        });
+                    } else {
+                        // For general paths, update both stroke and fill
+                        obj.set({
+                            fill: resolveCssVariable(drawState.selectedColor),
+                            stroke: obj.stroke || null
+                        });
+                        // Mark the object as dirty so that Fabric.js knows it needs to re-render
+                        obj.dirty = true;
+                        // Update coordinates to ensure the object reflects the change
+                        obj.setCoords();
+                    }
                     break;
+
+                //case 'line': // In case it's a free line
+                //    obj.set({ // update brush color
+                //        stroke: resolveCssVariable(drawState.selectedColor),
+                //        fill: obj.fill || 'transparent', // Ensure fill is not set, to avoid filling the entire area
+                //    });
+                //case 'path':
+                //    obj.fill = resolveCssVariable(drawState.selectedColor);
+                //    // Mark the object as dirty so that Fabric.js knows it needs to re-render
+                //    obj.dirty = true;
+                //    // Update coordinates to ensure the object reflects the change
+                //    obj.setCoords();
+                //    break;
                 case 'rect':
                 case 'circle':
                 case 'polygon':
@@ -659,18 +689,20 @@ export function selectColor(newSelected) {
                     //obj.set('fill', resolveCssVariable(drawState.selectedColor)); // update shapes color
                     obj.set({
                         fill: resolveCssVariable(drawState.selectedColor),
-                        stroke: resolveCssVariable(drawState.selectedColor) // Preserve stroke if it already exists or set to null if not needed
+                        stroke: obj.stroke || null // Preserve stroke if it already exists or set to null if not needed
                     });
                     break;
                 default:
                     console.log(`Object type ${obj.type} is not handled for color change.`);
                     break;
             }
+            // Force recalculation of coordinates
+            obj.setCoords();
         });
 
     } else {
         if (!isAnyBrushSelected()) {
-             canvas.backgroundColor = resolveCssVariable(drawState.selectedColor);
+            canvas.backgroundColor = resolveCssVariable(drawState.selectedColor);
         }
         console.log('No objects are currently selected.');
     }
