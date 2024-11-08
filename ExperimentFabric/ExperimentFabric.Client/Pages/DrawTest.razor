@@ -8,13 +8,17 @@
 <div class="container">
     <div class="row h-500 justify-content-around text-center">
         <div class="col pr-5 border-0">
-            <DrawCard></DrawCard>
+            <div class="d-flex flex-column justify-content-between">
+                <DrawCard CardType="shape"></DrawCard>
+                <DrawCard CardType="color"></DrawCard>
+                <DrawCard CardType="number"></DrawCard>
+            </div>
         </div>
         <div class="col pr-5 border-0">
             @if (_isModuleLoaded)
             {
                 @* <canvas id="fabricCanvas" width="500" height="400" style="border:1px solid #000000;"></canvas> *@
-                <canvas id="fabricCanvas" width="500" height="400" style="border:1px solid #000000;" class="w-100 border-rounded"></canvas>
+                <canvas id="fabricCanvas" width="500" height="400" style="border:1px solid #000000; border-radius: 0.625rem !important;" class="w-100 border-rounded"></canvas>
             }
             else
             {

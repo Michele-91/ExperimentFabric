@@ -2,17 +2,62 @@
 
 
 .shapes-card {
-    background-color: var(--memory-orange-color) !important;
+    background-color: var(--mem-color-burnt-orange) !important;
+    border-radius: 0.625rem !important;
 }
+.shape-button {
+    background-color: var(--mem-color-burnt-orange) !important;
+    color: white;
+    border-radius: 0.625rem !important;
+    border-color: white !important;
+}
+.shape-button-selected {
+    background-color: white;
+    color: var(--mem-color-burnt-orange);
+    border-radius: 0.625rem !important;
+    border-color: var(--mem-color-burnt-orange);
+}
+
+
+
+
 
 
 .colors-card {
-    background-color: var(--memory-grey-color);
+    background-color: var(--mem-color-slate-blue);
+    border-radius: 0.625rem !important;
+}
+.color-button {
+    /*background-color: var(--mem-color-burnt-orange) !important;*/
+    border-radius: 0.625rem !important;
+    border-color: black !important;
+    border-width: 0.5px;
+}
+.color-button-selected {
+    border-color: white !important;
+    border-width: 2px;
 }
 
 
+
+
+
+
+
 .maths-card {
-    background-color: var(--memory-green-color);
+    background-color: var(--mem-color-deep-teal);
+    border-radius: 0.625rem !important;
+}
+.maths-button {
+    background-color: var(--mem-color-deep-teal);
+    border-radius: 0.625rem !important;
+    border-color: black !important;
+    border-width: 0.5px;
+}
+.maths-button-selected {
+    background-color: var(--mem-color-deep-teal);
+    border-color: white !important;
+    border-width: 2px;
 }
 
 
@@ -23,7 +68,38 @@
 
 
 
-.shape-button {
-    background-color: var(--memory-orange-color) !important;
-    color: white;
+/*.canvas-card-container {
+
 }
+
+
+.canvas-card-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 3.5rem);*/
+    /*grid-template-rows: 5rem;*/
+    /*grid-gap: 0.3rem;*/
+    /*padding: 1rem;*/
+/*}
+
+.canvas-card-item {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;*/
+    /*padding: 0.625rem;*/
+    /*border: 0.2rem solid white;
+    border-radius: 0.625rem;
+
+}
+
+
+.canvas-card-item-image {
+    width: auto;
+    height: 50%;
+    margin: 0;
+}*/
+
+
+

@@ -1,11 +1,72 @@
 
 
 :root {
-    --memory-orange-color: #DF5937;
-    --memory-grey-color: #435485;
-    --memory-green-color: #1b8F81;
-    --memory-ocra-color: #A87700;
+    /* canvas colors first row */
+    --mem-color-plum-grey: #432B4E;
+    --mem-color-raspberry-magenta: #9D1885;
+    --mem-color-fuchsia-rose: #D74CAB;
+    --mem-color-berry-pink: #B3408D;
+    --mem-color-bubblegum-pink: #FF74B1;
+    --mem-color-crimson-red: #FF0100;
+    --mem-color-sunset-coral: #FD6254;
+    --mem-color-flame-orange: #FD610B;
+    --mem-color-tangerine: #FD9405;
+    --mem-color-marigold-yellow: #FFB409;
+    /* canvas colors second row */
+    --mem-color-amber-orange: #CE6F00;
+    --mem-color-citrus-lime: #D6E100;
+    --mem-color-lemon-glow: #FFE10E;
+    --mem-color-dijon-mustard: #C9A506;
+    --mem-color-fresh-lime: #9AD804;
+    --mem-color-spring-green: #B6C522;
+    --mem-color-moss-olive: #6D8512;
+    --mem-color-meadow-green: #19AA17;
+    --mem-color-woodland-green: #2B6E20;
+    --mem-color-deep-teal-green: #1C5B50;
+    /* canvas colors third row */
+    --mem-color-arctic-blue: #85D9F5;
+    --mem-color-sapphire-blue: #1446E7;
+    --mem-color-cornflower-blue: #5D5EB8;
+    --mem-color-midnight-blue: #323C84;
+    --mem-color-velvet-indigo: #2B2797;
+    --mem-color-onyx-black: #111212;
+    --mem-color-graphite-grey: #363636;
+    --mem-color-ash-grey: #8F8F8F;
+    --mem-color-silver-mist: #CFCFCF;
+    --mem-color-snow-white: #FFFFFF;
+
+
+    --mem-color-bg-white: white;
+    --mem-color-bg-grey: #F6F7FC;
+    --mem-color-deep-teal: #1B8F81;
+    --mem-color-dark-cyan: #1B8E8F;
+    --mem-color-steel-blue: #205284;
+    --mem-color-slate-blue: #435485;
+    --mem-color-periwinkle-blue: #7E90C2;
+    --mem-color-golden-rod: #A87700;
+    --mem-color-burnt-orange: #DF5937;
+    --mem-color-light-coral: #E4876F;
+    --mem-color-light-gray: #EAECEA;
+    --mem-color-periwinkle-mist: #CAD3EB;
+    --mem-color-powder-blue-haze: #C6D0EB;
+    --mem-color-icy-sky: #D5DCEF;
+    --mem-color-goldenrod-glow: #A87700;
+    --mem-color-bright-ochre: #D59906;
+    /* override bootstrap 5 default */
+    --bs-body-font-family: 'Roboto', sans-serif;
 }
+
+
+
+/*html,
+body {*/
+    /* font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; */
+    /* font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif; */
+    /*font-size: 1rem;
+    background-color: var(--mem-color-bg-grey);
+    min-height: 100%;
+}*/
+
 
 
 
